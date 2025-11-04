@@ -1,0 +1,8 @@
+com\startxai\HomeController.class
+com\startxai\config\CorsConfig$1.class
+com\startxai\controller\ChatController.class
+com\startxai\controller\TestController.class
+com\startxai\ApiService.class
+com\startxai\controller\StartXAIController.class
+com\startxai\App.class
+com\startxai\config\CorsConfig.class

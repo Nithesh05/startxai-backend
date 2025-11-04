@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
-        System.out.println("✅ StartXAIChatBot backend is running...");
+        System.out.println("🚀 StartXAI Backend Running on http://localhost:5000");
     }
 }
