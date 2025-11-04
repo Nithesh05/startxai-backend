@@ -1,13 +1,13 @@
-# ✅ Use official Java 17 runtime
-FROM openjdk:17-jdk-slim
+# ✅ Use reliable Java 17 runtime (Render compatible)
+FROM eclipse-temurin:17-jdk-jammy
 
-# ✅ Set working directory inside container
+# ✅ Set working directory
 WORKDIR /app
 
-# ✅ Copy all project files into the container
+# ✅ Copy all files into container
 COPY . .
 
-# ✅ Build the Spring Boot app (skip tests for faster build)
+# ✅ Build Spring Boot app (skip tests for faster build)
 RUN ./mvnw clean package -DskipTests || mvn clean package -DskipTests
 
 # ✅ Run the app when container starts
