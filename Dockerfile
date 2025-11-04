@@ -1,14 +1,23 @@
-# ✅ Use reliable Java 17 runtime (Render compatible)
-FROM eclipse-temurin:17-jdk-jammy
+# ✅ Use a full JDK + Maven image for reliable build on Render
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
-# ✅ Set working directory
+# Set working directory
 WORKDIR /app
 
-# ✅ Copy all files into container
+# Copy all files into the container
 COPY . .
 
-# ✅ Build Spring Boot app (skip tests for faster build)
-RUN ./mvnw clean package -DskipTests || mvn clean package -DskipTests
+# ✅ Build the JAR file (skip tests to make build faster)
+RUN mvn clean package -DskipTests
 
-# ✅ Run the app when container starts
-CMD ["java", "-jar", "target/StartXAIChatBot-1.0.0.jar"]
+# ✅ Use lightweight Java runtime for final image
+FROM eclipse-temurin:17-jdk-jammy
+
+# Set working directory again
+WORKDIR /app
+
+# Copy built jar from the previous stage
+COPY --from=build /app/target/StartXAIChatBot-1.0.0.jar /app/StartXAIChatBot-1.0.0.jar
+
+# ✅ Run the JAR
+CMD ["java", "-jar", "StartXAIChatBot-1.0.0.jar"]
